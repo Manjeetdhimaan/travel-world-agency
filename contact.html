@@ -106,37 +106,7 @@
 
                             <div class="clearfix"></div>
 
-                            <!-- <div class="col-lg-3 col-md-6 col-12 pe-lg-0">
-                                <div class="contact-info contact-info-border-start d-flex flex-column">
-                                    <strong class="site-footer-title d-block mb-3">Services</strong>
-
-                                    <ul class="footer-menu">
-                                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Websites</a></li>
-
-                                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Branding</a></li>
-
-                                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Ecommerce</a></li>
-
-                                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">SEO</a></li>
-                                    </ul>
-
-                                    <strong class="site-footer-title d-block mt-4 mb-3">Stay connected</strong>
-
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item"><a href="https://twitter.com/minthu" class="social-icon-link bi-twitter"></a></li>
-
-                                        <li class="social-icon-item"><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                                        <li class="social-icon-item"><a href="#" class="social-icon-link bi-pinterest"></a></li>
-
-                                        <li class="social-icon-item"><a href="https://www.youtube.com/templatemo" class="social-icon-link bi-youtube"></a></li>
-                                    </ul>
-
-                                    <strong class="site-footer-title d-block mt-4 mb-3">Start a project</strong>
-
-                                    <p class="mb-0">I’m available for freelance projects</p>
-                                </div>
-                            </div> -->
+                          
 
                             <div class="col-lg-6 col-md-6 col-12 ps-lg-0">
                                 <div class="contact-info d-flex flex-column">
@@ -190,50 +160,6 @@
                                             </div>
                                         </div>
 
-                                        <!-- <div class="col-lg-3 col-md-6 col-6">
-                                            <div class="form-check form-check-inline">
-                                                <input name="website" type="checkbox" class="form-check-input" id="inlineCheckbox1" value="1">
-
-                                                <label class="form-check-label" for="inlineCheckbox1">
-                                                    <i class="bi-globe form-check-icon"></i>
-                                                    <span class="form-check-label-text">Websites</span>
-                                                </label>
-                                          </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-6 col-6">
-                                            <div class="form-check form-check-inline">
-                                                <input name="branding" type="checkbox" class="form-check-input" id="inlineCheckbox2" value="1">
-
-                                                <label class="form-check-label" for="inlineCheckbox2">
-                                                    <i class="bi-lightbulb form-check-icon"></i>
-                                                    <span class="form-check-label-text">Branding</span>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-6 col-6">
-                                            <div class="form-check form-check-inline">
-                                                <input name="ecommerce" type="checkbox" class="form-check-input" id="inlineCheckbox3" value="1">
-
-                                                <label class="form-check-label" for="inlineCheckbox3">
-                                                    <i class="bi-phone form-check-icon"></i>
-                                                    <span class="form-check-label-text">Ecommerce</span>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-6 col-6">
-                                            <div class="form-check form-check-inline me-0">
-                                                <input name="seo" type="checkbox" class="form-check-input" id="inlineCheckbox4" value="1">
-
-                                                <label class="form-check-label" for="inlineCheckbox4">
-                                                    <i class="bi-google form-check-icon"></i>
-                                                    <span class="form-check-label-text">SEO</span>
-                                                </label>
-                                            </div>
-                                        </div> -->
-
                                         <div class="col-lg-12 col-12">
                                             <div class="form-floating">
                                                 <textarea class="form-control" id="message" name="message" placeholder="Tell me about the project"></textarea>
@@ -243,7 +169,7 @@
                                         </div>
 
                                         <div class="col-lg-3 col-12 ms-auto">
-                                            <button type="submit" class="form-control">Send</button>
+                                            <button type="submit" id="form-submit" class="form-control">Send</button>
                                         </div>
 
                                     </div>
@@ -274,7 +200,9 @@
                 </div>
             </div>
         </footer>
-
+        <div id="myDIV"></div>
+        <div id="serverErrors"> </div>
+        <div id="serverSuccess"> </div>
         <!-- JAVASCRIPT FILES -->
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -283,6 +211,97 @@
         <script src="js/jquery.magnific-popup.min.js"></script>
         <script src="js/magnific-popup-options.js"></script>
         <script src="js/custom.js"></script>
+
+
+       
+
+        <script>
+            const submitBTN = document.getElementById('form-submit');
+            const serverErrorsDIV = document.getElementById('serverErrors');
+            const serverSuccessDIV = document.getElementById('serverSuccess');
+        
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const number = document.getElementById('number');
+            const msg = document.getElementById('message');
+        
+            const deleteBTN = document.getElementById('cross');
+        
+            closeErr = (e) => {
+              if(e === 'error') {
+                serverErrorsDIV.style.visibility = 'hidden';
+              serverErrorsDIV.style.opacity = '0';
+              serverErrorsDIV.style.transform = "translate(-50%, -50px)";
+              }
+              serverSuccessDIV.style.visibility = 'hidden';
+              serverSuccessDIV.style.opacity = '0';
+              serverSuccessDIV.style.transform = "translate(-50%, -50px)";
+            }
+        
+            submitBTN.addEventListener('click', (e) => {
+              e.preventDefault();
+              if ((!email || email.value === '') || (!name || name.value === '')) {
+                alert('Please fill all required values')
+                return;
+              }
+        
+              // const data = new FormData();
+              // data.append("json", JSON.stringify(payload));
+        
+              const div = document.createElement('div');
+              div.style.alignItems = 'center';
+              // const iCross = document.createElement('i');
+              // iCross.setAttribute('class', 'bi bi-backspace');
+              // iCross.style.padding = '0 0 6px 8px'
+              div.setAttribute("class", "loading");
+              div.setAttribute("id", "loading");
+              document.getElementById("myDIV").style.display = 'block';
+              document.getElementById("myDIV").appendChild(div);
+        
+              document.body.style.overflow = 'hidden';
+              fetch('http://localhost:3100/api/send-mail-travel-agency', {
+                method: "post",
+                body: JSON.stringify({
+                  name: name.value,
+                  email: email.value,
+                  number: number.value,
+                  msg: msg.value,
+                  domain: 'travelagency.com'
+                }),
+                headers: {
+                  'Accept': 'application/json, text/plain, */*',
+                  'Content-Type': 'application/json; charset=UTF-8'
+                }
+                //make sure to serialize your JSON body
+        
+              }).then(res => res.json()).then(res => {
+                document.getElementById("loading").remove();
+                document.getElementById("myDIV").style.display = 'none';
+                document.body.style.overflow = 'auto'
+                serverSuccessDIV.style.transform = "translate(-50%, 0)";
+                serverSuccessDIV.style.opacity = "1";
+                serverSuccessDIV.style.visibility = "visible";
+                serverSuccessDIV.innerHTML = res.message + `<i class="bi bi-backspace" id="cross" onClick="closeErr('success')">`;
+        
+                setTimeout(() => {
+                  serverSuccessDIV.style.transform = "translate(-50%, -50px)";
+                  serverSuccessDIV.style.opacity = "0";
+                  serverSuccessDIV.style.visibility = "hidden";
+                }, 3000);
+              })
+                .catch(err => {
+                  serverErrorsDIV.style.transform = "translate(-50%, 0)";
+                  serverErrorsDIV.style.opacity = "1";
+                  serverErrorsDIV.style.visibility = "visible";
+                  serverErrorsDIV.innerHTML = err + `<i class="bi bi-backspace" id="cross" onClick="closeErr('error')">`;
+                  // serverErrorsDIV.appendChild(iCross);
+                  console.log(serverErrorsDIV)
+                  document.getElementById("loading").remove();
+                  document.getElementById("myDIV").style.display = 'none';
+                  document.body.style.overflow = 'auto';
+                })
+            })
+          </script>
 
     </body>
 </html>
