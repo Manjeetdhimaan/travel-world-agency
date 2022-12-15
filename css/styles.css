@@ -7,6 +7,7 @@
   --white-color:                  #ffffff;
   --primary-color:                #A46132;
   --secondary-color:              #EAAE55;
+  --grey-color:                   #e6e6e6;;
   --section-bg-color:             #f9f9f9;
   --dark-color:                   #000000;
   --p-color:                      #717275;
@@ -130,8 +131,8 @@ a:hover {
 }
 
 .section-padding {
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding-top: 100px;
+  padding-bottom: 60px;
 }
 
 b,
@@ -464,7 +465,8 @@ strong {
 -----------------------------------------*/
 .hero {
   /* background: var(--secondary-color); */
-  background: #e6e6e6;
+  background: var(--grey-color);
+  /* background: #e6e6e6; */
   position: relative;
   overflow: hidden;
   padding-top: 330px;
@@ -1205,7 +1207,7 @@ strong {
 
 .dropdown-content {
   padding: 10px;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   z-index: 3000;
   border-radius: 6px;
   transform: translateY(20px);
@@ -1240,11 +1242,22 @@ strong {
 }
 
 .internal-pages-hero{
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   height:105px
-
 }
 
+.internal-pages .nav-link:hover {
+  color: var(--secondary-color);
+}
+
+.internal-pages .nav-link.active {
+  color: var(--secondary-color);
+}
+
+.internal-pages .nav-link.active::after, 
+.internal-pages .nav-link:hover::after {
+  background: var(--secondary-color);
+}
 .articles-image {
   width: 52%;
   border-radius: 12px;
